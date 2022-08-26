@@ -37,6 +37,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		3CD99F7828B8AA750038D632 /* Observable.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = Observable.playground; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		4C73EF2128B3BF9A00C96D3D /* usket.RxSwift.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = usket.RxSwift.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4C73EF2428B3BF9A00C96D3D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		4C73EF2628B3BF9A00C96D3D /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -100,6 +101,7 @@
 		3CD99F7428B8A6180038D632 /* Observable */ = {
 			isa = PBXGroup;
 			children = (
+				3CD99F7828B8AA750038D632 /* Observable.playground */,
 			);
 			path = Observable;
 			sourceTree = "<group>";
