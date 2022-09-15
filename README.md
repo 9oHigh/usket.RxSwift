@@ -1,5 +1,4 @@
 # Mastering RxSwift in iOS
-
 > **Udemy의 Mastering RxSwift in iOS 강의를 통해 RxSwift..! 
 드디어 시작합니다 👀**
 > 
@@ -34,7 +33,7 @@
             name = "멍청이"
             
             func doSomething() {
-                    name = "말미잘"
+            		name = "말미잘"
             }
             print(name) // 멍청이
             doSomething()
@@ -105,13 +104,73 @@
         ```swift
         // 첫 번째 방법
         observable.subscribe { event in
-                if let element = event.element {
-                        print(element)
-                }
+        		if let element = event.element {
+        				print(element)
+        		}
         }
         // 두 번째 방법
         observable.subscribe {onNext: { element in
-                print(element)
+        		print(element)
         })
         
+        ```
+        
+
+- Subscribe
+    - Observable에 Observer 연결
+    - 예시
+        
+        ```swift
+        let observable = Observable.from([1,2,3,4,5])
+        
+        // unwrapping이 필요한 경우
+        observable.subcribe { event in
+        		if let element = event.element {
+        				print(element)
+        		}
+        }
+        
+        // unwrapping이 필요하지 않은 경우
+        observable.subscribe(onNext: { element in 
+        		print(element)
+        })
+        ```
+        
+
+- Dispose
+    - 메모리 관리(효율성)를 위해 구독을 취소하는 메서드
+    - 각각의 비동기 작업들을 DisposeBag에 담아두고 한 번에 처분하는 방식
+    
+    - 예시
+        
+        ```swift
+        let disposeBag = DisposeBag()
+        
+        Observable.of("A", "B", "C")
+        		.subscribe {
+        				print($0)
+        		}.dispoed(by: disposeBag)
+        ```
+        
+
+- Create
+    - 직접적인 코드 구현을 통해 옵저버 메서드를 호출하여 Observable을 생성
+    - 예시
+        
+        ```swift
+        Observable<String>.create { observer in
+            observer.onNext("A")
+            observer.onCompleted()
+            observer.onNext("?") // Dispose된 이후, 호출 될 수 없음
+            // 일회성이기 때문에 반드시 다시 생성되지 않도록 반환하기
+            return Disposables.create()
+        }.subscribe {
+            print("subscribe is \($0)")
+        } onError: {
+            print("onError is \($0)")
+        } onCompleted: {
+            print("onCompleted")
+        } onDisposed: {
+            print("onDisposed")
+        }
         ```
