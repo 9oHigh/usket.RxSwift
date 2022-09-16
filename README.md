@@ -174,3 +174,69 @@
             print("onDisposed")
         }
         ```
+        
+## Section 3: Subject
+
+- 하나의 subject는 하나의 Observable을 **구독**하면서, Observable이 항목을 **배출**시키도록 동작한다. 그 결과로 인해 Cold Observable이었던 subject를 Hot Observable로 만들기도 한다.
+    - Observer이면서 Observable이 될 수 있으며 이는 배출하는 데이터를 구독하는 Observer의 입장이 될 수 있고, 자체적으로 데이터를 생성할 수 있는 Observable의 역할을 할 수도 있다는 뜻.
+    - Hot Observable ( Subject )
+        - 생성됨과 동시에 아이템을 방출
+        - 나중에 구독한 옵저버는 시퀀스의 중간부터 관찰
+        - multicasting ( 여러 Observer가 공유할 수 있음 )
+    - Cold Observable
+        - 구독하기 전까지는 아이템을 방출하지 않고 기다림
+        - 시퀀스의 전체를 관찰
+        - unicasting
+
+- 종류
+    - PublishSubject
+        
+        ![Untitled](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/b07c397b-eda7-42b8-bea9-e0a6d8361898/Untitled.png)
+        
+        - PublishSubject는 구독 이후에 Observable이 배출한 항목들만 옵저버에게 배출
+            - 주의 할점
+                - 생성 시점에서 즉시 항목을 배출하는 특성 때문에 생성되는 시점과 구독하는 시점 사이에 배출되는 항목들을 잃어버릴 수 있다는 단점이 존재한다.
+                - 따라서 모든 항목의 배출을 보장해야한다면 Publish가 아닌 ReplaySubject를 사용해야한다.
+        
+    - BehaviorSubject
+        
+        ![Untitled](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/55b6a926-58eb-49c5-9e90-1b2c4edf65b8/Untitled.png)
+        
+        - 옵저버가 BehaviorSubject를 구독하기 시작하면, 옵저버는 Observable이 **가장 최근 발행한 항목**( 또는 아직 아무 값도 발행되지 않았다면 가장 **처음의 기본값**)의 발행을 시작하며 이후 Observable에 의해 발행된 항목을을 계속 발생
+        
+        - 초기값 / 최신값이 필요한 View를 가장 최신 데이터로 미리 채워놓는 상황에 용이
+    
+    - AysncSubject
+        
+        ![Untitled](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/e19bc657-a0e8-48a6-ab1d-6e10ce6ee213/Untitled.png)
+        
+        - Observable로부터 배출된 마지막 값을 배출하고 소스 Observable의 동작이 완료된 후에야 동작한다. ( 만약, 소스 Observable이 아무 값도 배출하지 않으면 AsyncSubject 역시 아무 값도 배출하지 않는다. )
+        
+    - ReplaySubject
+        
+        ![Untitled](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/39bd12cc-03d6-40fc-aacd-a52eece4793d/Untitled.png)
+        
+        - 옵저버가 구독을 시작한 시점과 관계없이  Observable이 배출한 모든 항목들을 모든 옵저버에게 배출
+        - 생성자 오버로드를 제공하는데 이를 통해, 재생 버퍼의 크기가 특정 이상일 경우 오래된 항목들을 제거할 수 있다.
+        - 주의 사항
+            - onNext 또는 on과 같은 메서드는 사용하지 않도록 주의해야한다.
+
+- 간단한 예제
+    - PublishSubject
+        - Subscribe한 이후부터 발생하는 이벤트를 처리
+            
+            ```swift
+            let subject = PublishSubject<String>()
+            
+            subject.onNext("Event number 1") // 아직 구독 이전이라 출력되지 않음
+            
+            subject.subscribe { event in
+                    print(event)
+            }
+            
+            subject.onNext("Event number 2") // Event number 2
+            subject.onCompleted() 
+            subject.dispose()
+            
+            subject.onNext("Event number 3") // dispose되서 출력되지 않음
+            ```
