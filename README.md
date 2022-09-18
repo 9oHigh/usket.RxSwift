@@ -206,7 +206,7 @@
 - 종류
     - PublishSubject
         
-        ![Untitled](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/b07c397b-eda7-42b8-bea9-e0a6d8361898/Untitled.png)
+        ![Untitled](https://user-images.githubusercontent.com/53691249/190897285-0f86bc0f-1d47-4c8d-bf42-9a716792ffd0.png)
         
         - PublishSubject는 구독 이후에 Observable이 배출한 항목들만 옵저버에게 배출
             - 주의 할점
@@ -215,7 +215,7 @@
         
     - BehaviorSubject
         
-        ![Untitled](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/55b6a926-58eb-49c5-9e90-1b2c4edf65b8/Untitled.png)
+        ![Untitled (1)](https://user-images.githubusercontent.com/53691249/190897295-77a041f8-61dd-4fab-a543-5da92c1ff5ef.png)
         
         - 옵저버가 BehaviorSubject를 구독하기 시작하면, 옵저버는 Observable이 **가장 최근 발행한 항목**( 또는 아직 아무 값도 발행되지 않았다면 가장 **처음의 기본값**)의 발행을 시작하며 이후 Observable에 의해 발행된 항목을을 계속 발생
         
@@ -223,13 +223,13 @@
     
     - AysncSubject
         
-        ![Untitled](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/e19bc657-a0e8-48a6-ab1d-6e10ce6ee213/Untitled.png)
+        ![Untitled (2)](https://user-images.githubusercontent.com/53691249/190897304-70798ebc-5853-4013-827d-f1da5db4efe3.png)
         
         - Observable로부터 배출된 마지막 값을 배출하고 소스 Observable의 동작이 완료된 후에야 동작한다. ( 만약, 소스 Observable이 아무 값도 배출하지 않으면 AsyncSubject 역시 아무 값도 배출하지 않는다. )
         
     - ReplaySubject
         
-        ![Untitled](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/39bd12cc-03d6-40fc-aacd-a52eece4793d/Untitled.png)
+        ![Untitled (3)](https://user-images.githubusercontent.com/53691249/190897322-e27b3366-6088-4a81-9c13-7ced3edf3d9a.png)
         
         - 옵저버가 구독을 시작한 시점과 관계없이  Observable이 배출한 모든 항목들을 모든 옵저버에게 배출
         - 생성자 오버로드를 제공하는데 이를 통해, 재생 버퍼의 크기가 특정 이상일 경우 오래된 항목들을 제거할 수 있다.
