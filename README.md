@@ -3,6 +3,20 @@
 드디어 시작합니다 👀**
 > 
 
+## 왜 RxSwift를 사용하는가?
+
+- RxSwift
+    - 함수형 프로그래밍인 Swift에 반응형 프로그래밍을 더해주는 라이브러리
+    - 장점
+        - 일관성이 없는 비동기 코드를 하나의 비동기 코드로 개발이 가능
+        - 화장이 불가능했던 아키텍처 패턴을 해결할 수 있고 서로 다르게 구현한 로직을 조합하기 쉬워진다.
+        - Thread 처리가 용이해짐에 따라 콜백 지옥에서 탈출 할 수 있게된다.
+        - 데이터를 갱신했을 때의 처리가 쉬워지고 코드 가독성도 높일 수 있다.
+    - 단점
+        - 높은 러닝 커브
+        - 많은 클로저 사용
+            - 순환 참조 사이클이 일어날 수 있는 부분 주의
+
 ## Section 1: Introduction
 
 - Introduction
@@ -33,7 +47,7 @@
             name = "멍청이"
             
             func doSomething() {
-            		name = "말미잘"
+                    name = "말미잘"
             }
             print(name) // 멍청이
             doSomething()
@@ -104,13 +118,13 @@
         ```swift
         // 첫 번째 방법
         observable.subscribe { event in
-        		if let element = event.element {
-        				print(element)
-        		}
+                if let element = event.element {
+                        print(element)
+                }
         }
         // 두 번째 방법
         observable.subscribe {onNext: { element in
-        		print(element)
+                print(element)
         })
         
         ```
@@ -125,14 +139,14 @@
         
         // unwrapping이 필요한 경우
         observable.subcribe { event in
-        		if let element = event.element {
-        				print(element)
-        		}
+                if let element = event.element {
+                        print(element)
+                }
         }
         
         // unwrapping이 필요하지 않은 경우
         observable.subscribe(onNext: { element in 
-        		print(element)
+                print(element)
         })
         ```
         
@@ -147,9 +161,9 @@
         let disposeBag = DisposeBag()
         
         Observable.of("A", "B", "C")
-        		.subscribe {
-        				print($0)
-        		}.dispoed(by: disposeBag)
+                .subscribe {
+                        print($0)
+                }.dispoed(by: disposeBag)
         ```
         
 
@@ -175,6 +189,7 @@
         }
         ```
         
+
 ## Section 3: Subject
 
 - 하나의 subject는 하나의 Observable을 **구독**하면서, Observable이 항목을 **배출**시키도록 동작한다. 그 결과로 인해 Cold Observable이었던 subject를 Hot Observable로 만들기도 한다.
@@ -240,3 +255,49 @@
             
             subject.onNext("Event number 3") // dispose되서 출력되지 않음
             ```
+            
+    
+    - BehaviorSubject
+        - 초기값을 가지고 생성
+        - 구독 전 이벤트 중 최신 이벤트만 전달받음
+            
+            ```swift
+            let subject = BehaviorSubject<String>(value: "Init")
+            
+            subject.onNext("Event number 1") // Event number 2가 가장 최신
+            subject.onNext("Event number 2")
+            
+            subject.subscribe { event in
+                    print(event) // Event number 2
+            }
+            
+            subject.onNext("Event number 3") // Event number 3
+            ```
+            
+    
+    - ReplaySubject
+        - 버퍼의 크기만큼 구독 전 최신 이벤트를 저장하고 있을 수 있음
+            
+            ```swift
+            let subject = ReplaySubject<String>.create(bufferSize: 2)
+            
+            subject.onNext("Event number 1") // 버퍼의 크기가 2이므로 이벤트 발생 될 수 없음
+            subject.onNext("Event number 2")
+            subject.onNext("Event number 2")
+            
+            subject.subscribe { event in
+                    print(event) 
+            }
+            // Event number 2
+            // Event number 3
+            ```
+            
+
+### ※ 참고
+
+- Observable과 Subject의 차이점
+    - Subject는 Observable과 observer의 역할을 모두 할 수 있는 bridge/proxy observable이다. 따라서 Observable과 Subject 모두 Subscribe할 수 있다.
+    - 다만, subscribe의 차이가 있다면 Subject는 multicast 방식이기 떄문에 여러개의 Observable을 subscribe할 수 있다. 단순 Observable은 unicast 방식이기 때문에 Observer 하나만을 subscribe 할 수 있다.
+    - 또한, Subject는 관찰자 세부 정보를 저장하고 코드를 한 번만 실행하고 모든 관찰자에게 결과를 제공한다.
+    - 반면, Observable은 단지 하나의 함수이기 때문에 어떤 상태도 가지지 않으므로 모든 새로운 Observer에 대해 관찰 가능한 create 코드를 반복해서 실행한다. (Observable에서 Subscribe를 하면 이벤트로 전달되는 것은 항상 새로운것)
+    - 코드는 각 관찰자에 대해 실행되므로 Http 호출인 경우 각 관찰자에 대해 호출된다. 이로 인해 주요 버그와 비효율이 발생한다.
