@@ -7,6 +7,8 @@
 
 import UIKit
 import SnapKit
+import RxSwift
+import RxCocoa
 
 final class PhotoFilterViewController: BaseViewController {
     
@@ -57,9 +59,9 @@ final class PhotoFilterViewController: BaseViewController {
     }
     
     @objc
-    func toAddPhotoFilterView() {
+    private func toAddPhotoFilterView() {
         let viewController = PhotoCollectionViewController()
         viewController.title = "Filter"
-        navigationController?.pushViewController(PhotoCollectionViewController(), animated: true)
+        navigationController?.pushViewController(viewController, animated: true)
     }
 }
