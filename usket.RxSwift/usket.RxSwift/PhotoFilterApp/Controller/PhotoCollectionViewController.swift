@@ -12,8 +12,8 @@ import Photos
 final class PhotoCollectionViewController: UIViewController {
     
     private var images = [PHAsset]()
-    private let selectedPhotoSubject = PublishSubject<UIImage>()
-    private var seletedPhoto: Observable<UIImage> {
+    let selectedPhotoSubject = PublishSubject<UIImage>()
+    var seletedPhoto: Observable<UIImage> {
         return selectedPhotoSubject.asObservable()
     }
     private let disposeBag = DisposeBag()
@@ -104,12 +104,12 @@ extension PhotoCollectionViewController: UICollectionViewDelegate, UICollectionV
         PHImageManager.default().requestImage(for: selectedAsset, targetSize: CGSize(width: 300, height: 300), contentMode: .aspectFit, options: nil) { [weak self] image, info in
             guard let info = info else { return }
             
-            let isDegradedImage = info["PHImageResultIsDeGradedKey"] as! Bool
+            let isDegradedImage = info["PHImageResultIsDegradedKey"] as! Bool
             
             if !isDegradedImage {
                 if let image = image {
                     self?.selectedPhotoSubject.onNext(image)
-                    self?.dismiss(animated: true)
+                    self?.navigationController?.popViewController(animated: true)
                 }
             }
         }

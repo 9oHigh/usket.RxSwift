@@ -14,12 +14,14 @@ final class PhotoFilterViewController: BaseViewController {
     
     private let imageView = UIImageView()
     private let filterButton = UIButton()
+    private let disposeBag = DisposeBag()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         setConfig()
         setUI()
         setConstraint()
+        bind()
     }
     
     private func setConfig() {
@@ -30,6 +32,7 @@ final class PhotoFilterViewController: BaseViewController {
         filterButton.setTitleColor(.white, for: .normal)
         filterButton.backgroundColor = .black
         filterButton.layer.cornerRadius = 5
+        filterButton.isHidden = true
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -58,10 +61,46 @@ final class PhotoFilterViewController: BaseViewController {
         }
     }
     
+    private func bind() {
+        
+        filterButton.rx.tap.subscribe({ _ in
+            guard let sourceImage = self.imageView.image else {
+                return
+            }
+            /* 기존 코드
+             FilterService().applyFilter(to: sourceImage) { filteredImage in
+                 DispatchQueue.main.async {
+                     self.imageView.image = filteredImage
+                 }
+             }
+             */
+            FilterService().applyFIlter(to: sourceImage)
+                .subscribe(onNext: {[weak self] filteredImage in
+                    DispatchQueue.main.async {
+                        self?.imageView.image = filteredImage
+                    }
+                })
+                .disposed(by: self.disposeBag)
+        })
+        .disposed(by: disposeBag)
+    }
+    
     @objc
     private func toAddPhotoFilterView() {
         let viewController = PhotoCollectionViewController()
         viewController.title = "Filter"
+        viewController.seletedPhoto.subscribe(onNext: { [weak self] photo in
+            DispatchQueue.main.async {
+                self?.updateUI(with: photo)
+            }
+        })
+        .disposed(by: disposeBag)
+        
         navigationController?.pushViewController(viewController, animated: true)
+    }
+    
+    private func updateUI(with image: UIImage) {
+        self.imageView.image = image
+        self.filterButton.isHidden = false
     }
 }

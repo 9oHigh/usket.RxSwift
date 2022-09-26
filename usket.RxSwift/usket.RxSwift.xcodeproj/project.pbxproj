@@ -18,6 +18,7 @@
 		4C73EF3C28B3BF9E00C96D3D /* usket_RxSwiftTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C73EF3B28B3BF9E00C96D3D /* usket_RxSwiftTests.swift */; };
 		4C73EF4628B3BF9E00C96D3D /* usket_RxSwiftUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C73EF4528B3BF9E00C96D3D /* usket_RxSwiftUITests.swift */; };
 		4C73EF4828B3BF9E00C96D3D /* usket_RxSwiftUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C73EF4728B3BF9E00C96D3D /* usket_RxSwiftUITestsLaunchTests.swift */; };
+		4CA58B9F28E1E87900D5CCA0 /* FilterService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CA58B9E28E1E87900D5CCA0 /* FilterService.swift */; };
 		4CC16EFB28D373B100100F54 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 4CC16EFA28D373B100100F54 /* SnapKit */; };
 		4CC16EFE28D8B54300100F54 /* PhotoFilterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CC16EFD28D8B54300100F54 /* PhotoFilterViewController.swift */; };
 		4CC16F0028D8B66600100F54 /* PhotoCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CC16EFF28D8B66600100F54 /* PhotoCollectionViewController.swift */; };
@@ -60,6 +61,7 @@
 		4C73EF4128B3BF9E00C96D3D /* usket.RxSwiftUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = usket.RxSwiftUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		4C73EF4528B3BF9E00C96D3D /* usket_RxSwiftUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = usket_RxSwiftUITests.swift; sourceTree = "<group>"; };
 		4C73EF4728B3BF9E00C96D3D /* usket_RxSwiftUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = usket_RxSwiftUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		4CA58B9E28E1E87900D5CCA0 /* FilterService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterService.swift; sourceTree = "<group>"; };
 		4CC16EF828D3724100100F54 /* Subject.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = Subject.playground; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		4CC16EFD28D8B54300100F54 /* PhotoFilterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoFilterViewController.swift; sourceTree = "<group>"; };
 		4CC16EFF28D8B66600100F54 /* PhotoCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoCollectionViewController.swift; sourceTree = "<group>"; };
@@ -206,6 +208,14 @@
 			path = usket.RxSwiftUITests;
 			sourceTree = "<group>";
 		};
+		4CA58B9D28E1E86D00D5CCA0 /* Service */ = {
+			isa = PBXGroup;
+			children = (
+				4CA58B9E28E1E87900D5CCA0 /* FilterService.swift */,
+			);
+			path = Service;
+			sourceTree = "<group>";
+		};
 		4CC16EF628D3722F00100F54 /* Subject */ = {
 			isa = PBXGroup;
 			children = (
@@ -219,6 +229,7 @@
 			children = (
 				4C7152DC28D9F5BC00086943 /* Controller */,
 				4C7152DD28D9F5CC00086943 /* Cell */,
+				4CA58B9D28E1E86D00D5CCA0 /* Service */,
 			);
 			path = PhotoFilterApp;
 			sourceTree = "<group>";
@@ -369,6 +380,7 @@
 				4C73EF2728B3BF9A00C96D3D /* SceneDelegate.swift in Sources */,
 				4C7152D928D8CBC400086943 /* UIViewController + Extension.swift in Sources */,
 				4CC16EFE28D8B54300100F54 /* PhotoFilterViewController.swift in Sources */,
+				4CA58B9F28E1E87900D5CCA0 /* FilterService.swift in Sources */,
 				4CC16F0028D8B66600100F54 /* PhotoCollectionViewController.swift in Sources */,
 				4C7152D528D8CB8B00086943 /* BaseViewController.swift in Sources */,
 			);
