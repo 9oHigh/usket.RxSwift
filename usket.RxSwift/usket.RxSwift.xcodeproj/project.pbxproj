@@ -228,8 +228,8 @@
 			isa = PBXGroup;
 			children = (
 				4C7152DC28D9F5BC00086943 /* Controller */,
-				4C7152DD28D9F5CC00086943 /* Cell */,
 				4CA58B9D28E1E86D00D5CCA0 /* Service */,
+				4C7152DD28D9F5CC00086943 /* Cell */,
 			);
 			path = PhotoFilterApp;
 			sourceTree = "<group>";

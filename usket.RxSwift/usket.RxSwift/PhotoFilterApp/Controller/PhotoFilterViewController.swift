@@ -35,11 +35,6 @@ final class PhotoFilterViewController: BaseViewController {
         filterButton.isHidden = true
     }
     
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        self.title = "Camera Filter"
-    }
-    
     private func setUI() {
         view.addSubview(imageView)
         view.addSubview(filterButton)
@@ -67,15 +62,17 @@ final class PhotoFilterViewController: BaseViewController {
             guard let sourceImage = self.imageView.image else {
                 return
             }
-            /* 기존 코드
+            /* 기존 코드 - escaping closure를 통해서 받아온 이미지를 적용
              FilterService().applyFilter(to: sourceImage) { filteredImage in
                  DispatchQueue.main.async {
                      self.imageView.image = filteredImage
                  }
              }
              */
-            FilterService().applyFIlter(to: sourceImage)
-                .subscribe(onNext: {[weak self] filteredImage in
+            
+            // Observable<UIImage>를 생성하여 방출
+            FilterService().applyFilter(to: sourceImage)
+                .subscribe(onNext: { [weak self] filteredImage in
                     DispatchQueue.main.async {
                         self?.imageView.image = filteredImage
                     }
@@ -89,6 +86,7 @@ final class PhotoFilterViewController: BaseViewController {
     private func toAddPhotoFilterView() {
         let viewController = PhotoCollectionViewController()
         viewController.title = "Filter"
+        // PhotoCollectionViewController에서 선택된 사진(selectedPhoto)을 observable<UIImage>로 방출 (selectedPhotoSubject.onNext(image) -> return selectedPhotoSubject.asObservable)
         viewController.seletedPhoto.subscribe(onNext: { [weak self] photo in
             DispatchQueue.main.async {
                 self?.updateUI(with: photo)

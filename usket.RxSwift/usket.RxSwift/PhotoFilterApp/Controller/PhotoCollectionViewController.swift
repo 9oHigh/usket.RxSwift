@@ -9,7 +9,7 @@ import UIKit
 import RxSwift
 import Photos
 
-final class PhotoCollectionViewController: UIViewController {
+final class PhotoCollectionViewController: BaseViewController {
     
     private var images = [PHAsset]()
     let selectedPhotoSubject = PublishSubject<UIImage>()

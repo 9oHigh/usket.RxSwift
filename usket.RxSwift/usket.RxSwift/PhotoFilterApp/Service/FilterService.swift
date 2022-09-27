@@ -17,7 +17,7 @@ final class FilterService {
         self.context = CIContext()
     }
     
-    func applyFIlter(to inputImage: UIImage) -> Observable<UIImage> {
+    func applyFilter(to inputImage: UIImage) -> Observable<UIImage> {
         return Observable<UIImage>.create { observer in
             self.applyFilter(to: inputImage) { filteredImage in
                 observer.onNext(filteredImage)
