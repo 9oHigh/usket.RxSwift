@@ -46,6 +46,7 @@
 
 /* Begin PBXFileReference section */
 		3CD99F7828B8AA750038D632 /* Observable.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = Observable.playground; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
+		4C5365C428F440EA000B8F7D /* FilteringOperator.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = FilteringOperator.playground; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		4C7152D028D8C46400086943 /* Launch Screen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
 		4C7152D428D8CB8B00086943 /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		4C7152D828D8CBC400086943 /* UIViewController + Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController + Extension.swift"; sourceTree = "<group>"; };
@@ -124,6 +125,14 @@
 			path = Observable;
 			sourceTree = "<group>";
 		};
+		4C5365C328F440B3000B8F7D /* Filtering Operator */ = {
+			isa = PBXGroup;
+			children = (
+				4C5365C428F440EA000B8F7D /* FilteringOperator.playground */,
+			);
+			path = "Filtering Operator";
+			sourceTree = "<group>";
+		};
 		4C7152D628D8CBA500086943 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
@@ -184,6 +193,7 @@
 				3CD99F7428B8A6180038D632 /* Observable */,
 				4CC16EF628D3722F00100F54 /* Subject */,
 				4CC16EFC28D8B4BC00100F54 /* PhotoFilterApp */,
+				4C5365C328F440B3000B8F7D /* Filtering Operator */,
 				4C7152D628D8CBA500086943 /* Utils */,
 				4C73EF3228B3BF9D00C96D3D /* Info.plist */,
 				4C7152D028D8C46400086943 /* Launch Screen.storyboard */,
