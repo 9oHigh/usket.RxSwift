@@ -18,10 +18,16 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         guard let windowScene = (scene as? UIWindowScene) else { return }
         guard let _ = (scene as? UIWindowScene) else { return }
-        
-        let viewController = PhotoFilterViewController()
-        viewController.title = "Camera Filter"
+        /*
+         PhotoFilterViewController
+         let viewController = PhotoFilterViewController()
+         viewController.title = "Camera Filter"
 
+         let rootViewController = UINavigationController(rootViewController: viewController )
+         */
+        
+        let viewController = TaskListViewController()
+        viewController.title = "Good List"
         let rootViewController = UINavigationController(rootViewController: viewController )
         
         window = UIWindow(windowScene: windowScene)

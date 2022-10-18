@@ -12,5 +12,6 @@ class BaseViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setDefaultNavigationBar()
+        view.backgroundColor = .white
     }
 }
