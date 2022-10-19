@@ -6,9 +6,20 @@
 //
 
 import UIKit
+import RxSwift
+
+protocol TaskDelegate {
+    func getTaskObservable(task: Observable<Task>)
+}
 
 final class AddTaskViewController: BaseViewController {
     
+    var delegate: TaskDelegate?
+    private let taskSubject = PublishSubject<Task>()
+    var taskSubjectObservable: Observable<Task> {
+        return taskSubject.asObservable()
+    }
+    private let disposeBag = DisposeBag()
     private lazy var segmentControl: UISegmentedControl = {
         let items = ["Low", "Medium", "High"]
        let segment = UISegmentedControl(items: items)
@@ -16,6 +27,7 @@ final class AddTaskViewController: BaseViewController {
         return segment
     }()
     private let textField = UITextField()
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -55,6 +67,13 @@ final class AddTaskViewController: BaseViewController {
     
     @objc
     func saveTask() {
+        guard let priority = Priority(rawValue: self.segmentControl.selectedSegmentIndex), let title = self.textField.text else {
+            return
+        }
         
+        let task = Task(title: title, priority: priority)
+        taskSubject.onNext(task)
+        delegate?.getTaskObservable(task: taskSubjectObservable)
+        self.dismiss(animated: true)
     }
 }

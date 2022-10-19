@@ -9,13 +9,31 @@ import UIKit
 
 final class TaskTableViewCell: UITableViewCell {
     
-    static let identifier = "TaskTableViewCell" 
+    static let identifier = "TaskTableViewCell"
+    let todoLabel = UILabel()
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
+        setConfig()
+        setUI()
+        setConstraint()
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    private func setConfig() {
+        todoLabel.textAlignment = .left
+    }
+    
+    private func setUI() {
+        addSubview(todoLabel)
+    }
+    
+    private func setConstraint() {
+        todoLabel.snp.makeConstraints { make in
+            make.edges.equalToSuperview()
+        }
     }
 }

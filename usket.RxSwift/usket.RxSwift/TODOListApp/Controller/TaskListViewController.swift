@@ -6,8 +6,10 @@
 //
 
 import UIKit
+import RxSwift
+import RxRelay
 
-final class TaskListViewController: BaseViewController {
+final class TaskListViewController: BaseViewController, TaskDelegate {
     
     private lazy var segmentControl: UISegmentedControl = {
         let items = ["All", "Low", "Medium", "High"]
@@ -15,7 +17,9 @@ final class TaskListViewController: BaseViewController {
         segment.selectedSegmentIndex = 0
         return segment
     }()
+    private var tasks = BehaviorRelay<[Task]>(value: [])
     private let tableView = UITableView()
+    private let disposeBag = DisposeBag()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -54,9 +58,22 @@ final class TaskListViewController: BaseViewController {
     func addTask() {
         let viewController = AddTaskViewController()
         let rootViewController = UINavigationController(rootViewController: viewController)
+        viewController.delegate = self
         rootViewController.modalPresentationStyle = .fullScreen
         
         self.present(rootViewController, animated: true)
+    }
+    
+    func getTaskObservable(task: Observable<Task>) {
+        // self.tasks.value is a get property..
+        task.subscribe(onNext:{ item in
+            let prioriy = Priority(rawValue: self.segmentControl.selectedSegmentIndex - 1)
+            
+            var existingTasks = self.tasks.value
+            existingTasks.append(item)
+            self.tasks.accept(existingTasks)
+        })
+        .disposed(by: disposeBag)
     }
 }
 extension TaskListViewController: UITableViewDelegate, UITableViewDataSource {
@@ -66,7 +83,7 @@ extension TaskListViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        10
+        return tasks.value.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -74,6 +91,7 @@ extension TaskListViewController: UITableViewDelegate, UITableViewDataSource {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: TaskTableViewCell.identifier, for: indexPath) as? TaskTableViewCell else {
             return UITableViewCell()
         }
+        
         return cell
     }
 }
