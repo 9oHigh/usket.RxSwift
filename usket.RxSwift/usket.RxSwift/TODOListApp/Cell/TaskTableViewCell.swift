@@ -10,7 +10,7 @@ import UIKit
 final class TaskTableViewCell: UITableViewCell {
     
     static let identifier = "TaskTableViewCell"
-    let todoLabel = UILabel()
+    private let todoLabel = UILabel()
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -33,7 +33,13 @@ final class TaskTableViewCell: UITableViewCell {
     
     private func setConstraint() {
         todoLabel.snp.makeConstraints { make in
-            make.edges.equalToSuperview()
+            make.centerY.equalToSuperview()
+            make.height.greaterThanOrEqualTo(30)
+            make.leading.equalTo(16)
         }
+    }
+    
+    func setTitle(title: String) {
+        todoLabel.text = title
     }
 }
