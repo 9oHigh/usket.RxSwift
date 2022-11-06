@@ -70,6 +70,7 @@
 		4C73EF4128B3BF9E00C96D3D /* usket.RxSwiftUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = usket.RxSwiftUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		4C73EF4528B3BF9E00C96D3D /* usket_RxSwiftUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = usket_RxSwiftUITests.swift; sourceTree = "<group>"; };
 		4C73EF4728B3BF9E00C96D3D /* usket_RxSwiftUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = usket_RxSwiftUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		4C8B7391291692DC00384A00 /* TransformingOperator.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = TransformingOperator.playground; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		4CA58B9E28E1E87900D5CCA0 /* FilterService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterService.swift; sourceTree = "<group>"; };
 		4CC16EF828D3724100100F54 /* Subject.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = Subject.playground; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		4CC16EFD28D8B54300100F54 /* PhotoFilterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoFilterViewController.swift; sourceTree = "<group>"; };
@@ -238,6 +239,7 @@
 				4CC16EFC28D8B4BC00100F54 /* PhotoFilterApp */,
 				4C5365C328F440B3000B8F7D /* Filtering Operator */,
 				4C55243428FEDEA500FC5070 /* TODOListApp */,
+				4C8B7390291692B100384A00 /* Transforming Operator */,
 				4C7152D628D8CBA500086943 /* Utils */,
 				4C73EF3228B3BF9D00C96D3D /* Info.plist */,
 				4C7152D028D8C46400086943 /* Launch Screen.storyboard */,
@@ -260,6 +262,14 @@
 				4C73EF4728B3BF9E00C96D3D /* usket_RxSwiftUITestsLaunchTests.swift */,
 			);
 			path = usket.RxSwiftUITests;
+			sourceTree = "<group>";
+		};
+		4C8B7390291692B100384A00 /* Transforming Operator */ = {
+			isa = PBXGroup;
+			children = (
+				4C8B7391291692DC00384A00 /* TransformingOperator.playground */,
+			);
+			path = "Transforming Operator";
 			sourceTree = "<group>";
 		};
 		4CA58B9D28E1E86D00D5CCA0 /* Service */ = {
