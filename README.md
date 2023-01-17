@@ -1,9 +1,4 @@
-# Mastering RxSwift in iOS
-> **Udemy의 Mastering RxSwift in iOS 강의를 통해 RxSwift..! 
-드디어 시작합니다 👀**
-> 
-
-## 왜 RxSwift를 사용하는가?
+<H2>왜 RxSwift를 사용하는가?</H2>
 
 - RxSwift
     - 함수형 프로그래밍인 Swift에 반응형 프로그래밍을 더해주는 라이브러리
@@ -17,7 +12,9 @@
         - 많은 클로저 사용
             - 순환 참조 사이클이 일어날 수 있는 부분 주의
 
-## Section 1: Introduction
+<details>
+ <summary> <H2>Section 1: Introduction</H2> </summary>
+ <div markdown="1">
 
 - Introduction
     - 전체 섹션에 대한 간략한 소개
@@ -72,7 +69,12 @@
 
 - Hello, RxSwift!
 
-## section 2: Observable
+</div>
+ </details>
+
+<details>
+ <summary> <H2>section 2: Observable</H2> </summary>
+ <div markdown="2">
 
 - Observable
     - 비동기로 동작하는 어떠한 데이터들의 흐름, 시퀀스를 말한다.
@@ -188,9 +190,12 @@
             print("onDisposed")
         }
         ```
-        
+</div>
+ </details>   
 
-## Section 3: Subject
+<details>
+ <summary> <H2>Section 3: Subject</H2> </summary>
+ <div markdown="3">
 
 - 하나의 subject는 하나의 Observable을 **구독**하면서, Observable이 항목을 **배출**시키도록 동작한다. 그 결과로 인해 Cold Observable이었던 subject를 Hot Observable로 만들기도 한다.
     - Observer이면서 Observable이 될 수 있으며 이는 배출하는 데이터를 구독하는 Observer의 입장이 될 수 있고, 자체적으로 데이터를 생성할 수 있는 Observable의 역할을 할 수도 있다는 뜻.
@@ -291,7 +296,8 @@
             // Event number 2
             // Event number 3
             ```
-            
+</div>
+ </details>      
 
 ### ※ 참고
 
