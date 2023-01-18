@@ -307,3 +307,275 @@
     - 또한, Subject는 관찰자 세부 정보를 저장하고 코드를 한 번만 실행하고 모든 관찰자에게 결과를 제공한다.
     - 반면, Observable은 단지 하나의 함수이기 때문에 어떤 상태도 가지지 않으므로 모든 새로운 Observer에 대해 관찰 가능한 create 코드를 반복해서 실행한다. (Observable에서 Subscribe를 하면 이벤트로 전달되는 것은 항상 새로운것)
     - 코드는 각 관찰자에 대해 실행되므로 Http 호출인 경우 각 관찰자에 대해 호출된다. 이로 인해 주요 버그와 비효율이 발생한다.
+    
+    
+</div>
+ </details>
+
+<details>
+ <summary> <H2>section 5: Filtering Operator</H2> </summary>
+ <div markdown="4">
+ 
+- ignoreElements
+    - 방출되는 요소는 무시하고, Observable의 종료 이벤트(`onError`, `onCompleted`)만 허용한다.
+        
+        ```swift
+        // MARK: - IgnoreElements
+        strikes
+            .ignoreElements()
+            .subscribe({ _ in
+                print("[Subscription is called]")
+            })
+            .disposed(by: disposeBag)
+        
+        strikes.onNext("A")
+        strikes.onNext("B")
+        strikes.onNext("C")
+        
+        strikes.onCompleted()
+        
+        // print : [Subscription is called]
+        ```
+        
+- elementAt → element(at: N)
+    - 요소중에서 N번째에 해당하는 요소만 방출합니다.
+        
+        ```swift
+        // MARK: - ElementAt
+        
+        strikes2.element(at: 2)
+            .subscribe(onNext: { _ in
+                print("is called!")
+            })
+            .disposed(by: disposeBag)
+        
+        strikes2.onNext("X") // 무시
+        strikes2.onNext("X") // print : is called!
+        strikes2.onNext("X") // 무시
+        ```
+        
+- filter
+    - 해당 요소들 중에 필터의 조건에 부합하는 요소를 방출한다.
+        
+        ```swift
+        // MARK: - Filter
+        
+        Observable.of(1,2,3,4,5,6,7,8,9)
+            .filter { $0 % 2 == 0 }
+            .subscribe({ number in
+                print("number", number)
+            })
+            .disposed(by: disposeBag)
+        
+        // print : 2, 4, 5, 6, 8
+        ```
+        
+- skip
+    - 처음 N개의 요소들은 스킵하고 그 이후의 요소들만 방출한다.
+        
+        ```swift
+        // MARK: - Skip
+        
+        Observable.of("A", "B", "C", "D", "E", "F")
+            .skip(2)
+            .subscribe({ item in
+                print("item", item)
+            })
+            .disposed(by: disposeBag)
+        
+        /*
+        print
+        item next(C)
+        item next(D)
+        item next(E)
+        item next(F)
+        */
+        ```
+        
+    
+- skip(until: )
+    - 특정한 시퀀스에서 이벤트가 발생하기 전까지 모든 이벤트가 스킵된다.
+        
+        ```swift
+        // MARK: - skip until
+        
+        let skipUntilSubject = PublishSubject<String>()
+        let trigger = PublishSubject<String>()
+        
+        skipUntilSubject.skip(until: trigger)
+            .subscribe(onNext: {
+                print($0)
+            })
+            .disposed(by: disposeBag)
+        
+        skipUntilSubject.onNext("A")
+        skipUntilSubject.onNext("B")
+        trigger.onNext("X")
+        skipUntilSubject.onNext("C")
+        
+        // print : C
+        ```
+        
+
+- take
+    - skip과는 반대로 N번째까지의 요소만 방출한다.
+        
+        ```swift
+        // MARK: - take
+        
+        Observable.of(1,2,3,4,5)
+            .take(3)
+            .subscribe({ item in
+                print("take Item", item)
+            })
+            .disposed(by: disposeBag)
+        
+        // print : 1, 2, 3
+        ```
+        
+    
+- take(while:)
+    - while 내부의 조건이 false일 때까지 반복하여 방출합니다.
+        
+        ```swift
+        // MARK: - take while
+        
+        Observable<Int>.of(2,4,5,6,7) // 타입명시 확실하게
+            .take(while: { $0 % 2 == 0 })
+            .subscribe({ item in
+                print("take while Item", item)
+            })
+            .disposed(by: disposeBag)
+        
+        //print : 2, 4
+        ```
+        
+
+- take(until:)
+    - 특정한 시퀀스에서 이벤트가 발생한 이후 이벤트는 무시한다.
+        
+        ```swift
+        // MARK: - take until
+        
+        let takeUntilSubject = PublishSubject<String>()
+        
+        takeUntilSubject
+            .take(until: trigger)
+            .subscribe({ item in
+                print("take until Item", item)
+            })
+            .disposed(by: disposeBag)
+        
+        takeUntilSubject.onNext("A")
+        takeUntilSubject.onNext("B")
+        trigger.onNext("X") // 트리거
+        takeUntilSubject.onNext("C")
+        
+        /*
+        print
+        take until Item next(A)
+        take until Item next(B)
+        */
+        ```
+
+ </div>
+</details>
+
+
+<details>
+ <summary> <H2>section 6: Transforming Operator</H2> </summary>
+ <div markdown="5">
+ 
+ - toArray
+    - 들어오는 요소들을 배열로 변환해주는 오퍼레이터이다.
+        
+        ```swift
+        // MARK: - toArray
+        
+        Observable.of(1,2,3,4,5)
+            .toArray()
+            .subscribe({
+                print($0)
+            })
+            .disposed(by: disposeBag)
+        
+        // print : success([1, 2, 3, 4, 5])
+        ```
+        
+- map
+    - 요소들에 변형을 주어 방출하는 오퍼레이터이다.
+        
+        ```swift
+        // MARK: - map
+        
+        Observable.of(1,2,3,4,5)
+            .map { $0 * 2 }
+            .subscribe({
+                print($0)
+            })
+            .disposed(by: disposeBag)
+        
+        // print : 2, 4, 6, 8, 10
+        ```
+        
+- flatMap
+    - 각각의 하나의 시퀀스에서 이벤트에 대해 시퀀스를 만든 이후에 하나의 시퀀스로 만들어주는 오퍼레이터이다.
+        
+        ```swift
+        // MARK: - flatMap
+        
+        struct Student {
+            var score: BehaviorRelay<Int>
+        }
+        
+        let john = Student(score: BehaviorRelay(value: 90))
+        let mary = Student(score: BehaviorRelay(value: 90))
+        
+        let stuedent = PublishSubject<Student>()
+        let flatMapLatestStudent = PublishSubject<Student>()
+        
+        stuedent.asObserver()
+            .flatMap{ $0.score.asObservable() }
+            .subscribe(onNext: {
+                print($0)
+            })
+            .disposed(by: disposeBag)
+        
+        stuedent.onNext(john)    // print : 90
+        john.score.accept(100)   // print : 90 100 
+        
+        stuedent.onNext(mary)    // print : 90 100 90
+        mary.score.accept(80)    // print : 90 100 90 80
+        
+        john.score.accept(43)    // print : 90 100 90 80 43
+        ```
+        
+- flatMapLatest
+    - 가장 최근에 만들어진 시퀀스만 방출한다.
+        
+        ```swift
+        // MARK: - flatMapLatest
+        
+        flatMapLatestStudent.asObserver()
+            .flatMapLatest { $0.score.asObservable() }
+            .subscribe(onNext: {
+                print($0)
+            })
+            .disposed(by: disposeBag)
+        
+        flatMapLatestStudent.onNext(john)
+        john.score.accept(100)
+        
+        flatMapLatestStudent.onNext(mary)
+        mary.score.accept(20)
+        
+        /*
+        90
+        100
+        90
+        20
+        */
+        ```
+ 
+</div>
+ </details>
