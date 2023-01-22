@@ -13,6 +13,7 @@
 		3C5C5577291A15E900C3E474 /* NewsListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C5C5576291A15E900C3E474 /* NewsListViewController.swift */; };
 		3C5C5579291CBA7400C3E474 /* NewsListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C5C5578291CBA7400C3E474 /* NewsListTableViewCell.swift */; };
 		3C5C563E292C8E2100C3E474 /* Article.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C5C563D292C8E2100C3E474 /* Article.swift */; };
+		4C089747297D9D9200F3305E /* URLRequest+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C089746297D9D9200F3305E /* URLRequest+Extension.swift */; };
 		4C55243628FEDEC000FC5070 /* TaskListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C55243528FEDEC000FC5070 /* TaskListViewController.swift */; };
 		4C55243A28FEEF8F00FC5070 /* TaskTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C55243928FEEF8F00FC5070 /* TaskTableViewCell.swift */; };
 		4C55243C28FEF0EB00FC5070 /* AddTaskViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C55243B28FEF0EB00FC5070 /* AddTaskViewController.swift */; };
@@ -56,6 +57,7 @@
 		3C5C5578291CBA7400C3E474 /* NewsListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsListTableViewCell.swift; sourceTree = "<group>"; };
 		3C5C563D292C8E2100C3E474 /* Article.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Article.swift; sourceTree = "<group>"; };
 		3CD99F7828B8AA750038D632 /* Observable.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = Observable.playground; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
+		4C089746297D9D9200F3305E /* URLRequest+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URLRequest+Extension.swift"; sourceTree = "<group>"; };
 		4C5365C428F440EA000B8F7D /* FilteringOperator.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = FilteringOperator.playground; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		4C55243528FEDEC000FC5070 /* TaskListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskListViewController.swift; sourceTree = "<group>"; };
 		4C55243928FEEF8F00FC5070 /* TaskTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskTableViewCell.swift; sourceTree = "<group>"; };
@@ -229,6 +231,7 @@
 			isa = PBXGroup;
 			children = (
 				4C7152D828D8CBC400086943 /* UIViewController + Extension.swift */,
+				4C089746297D9D9200F3305E /* URLRequest+Extension.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -488,6 +491,7 @@
 				4C73EF2728B3BF9A00C96D3D /* SceneDelegate.swift in Sources */,
 				4C55243628FEDEC000FC5070 /* TaskListViewController.swift in Sources */,
 				4C7152D928D8CBC400086943 /* UIViewController + Extension.swift in Sources */,
+				4C089747297D9D9200F3305E /* URLRequest+Extension.swift in Sources */,
 				3C5C5577291A15E900C3E474 /* NewsListViewController.swift in Sources */,
 				4C55243F29003B0A00FC5070 /* Task.swift in Sources */,
 				4CC16EFE28D8B54300100F54 /* PhotoFilterViewController.swift in Sources */,
