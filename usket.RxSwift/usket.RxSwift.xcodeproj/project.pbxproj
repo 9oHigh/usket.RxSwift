@@ -7,13 +7,14 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		3C5C556E2918C3C200C3E474 /* RxCocoa in Frameworks */ = {isa = PBXBuildFile; productRef = 3C5C556D2918C3C200C3E474 /* RxCocoa */; };
-		3C5C55702918C3C200C3E474 /* RxRelay in Frameworks */ = {isa = PBXBuildFile; productRef = 3C5C556F2918C3C200C3E474 /* RxRelay */; };
-		3C5C55722918C3C200C3E474 /* RxSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 3C5C55712918C3C200C3E474 /* RxSwift */; };
 		3C5C5577291A15E900C3E474 /* NewsListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C5C5576291A15E900C3E474 /* NewsListViewController.swift */; };
 		3C5C5579291CBA7400C3E474 /* NewsListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C5C5578291CBA7400C3E474 /* NewsListTableViewCell.swift */; };
 		3C5C563E292C8E2100C3E474 /* Article.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C5C563D292C8E2100C3E474 /* Article.swift */; };
 		4C089747297D9D9200F3305E /* URLRequest+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C089746297D9D9200F3305E /* URLRequest+Extension.swift */; };
+		4C08974C297E23B100F3305E /* RxCocoa in Frameworks */ = {isa = PBXBuildFile; productRef = 4C08974B297E23B100F3305E /* RxCocoa */; };
+		4C08974E297E23B100F3305E /* RxRelay in Frameworks */ = {isa = PBXBuildFile; productRef = 4C08974D297E23B100F3305E /* RxRelay */; };
+		4C089750297E23B100F3305E /* RxSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 4C08974F297E23B100F3305E /* RxSwift */; };
+		4C089753297E23C600F3305E /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 4C089752297E23C600F3305E /* SnapKit */; };
 		4C55243628FEDEC000FC5070 /* TaskListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C55243528FEDEC000FC5070 /* TaskListViewController.swift */; };
 		4C55243A28FEEF8F00FC5070 /* TaskTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C55243928FEEF8F00FC5070 /* TaskTableViewCell.swift */; };
 		4C55243C28FEF0EB00FC5070 /* AddTaskViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C55243B28FEF0EB00FC5070 /* AddTaskViewController.swift */; };
@@ -30,7 +31,6 @@
 		4C73EF4628B3BF9E00C96D3D /* usket_RxSwiftUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C73EF4528B3BF9E00C96D3D /* usket_RxSwiftUITests.swift */; };
 		4C73EF4828B3BF9E00C96D3D /* usket_RxSwiftUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C73EF4728B3BF9E00C96D3D /* usket_RxSwiftUITestsLaunchTests.swift */; };
 		4CA58B9F28E1E87900D5CCA0 /* FilterService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CA58B9E28E1E87900D5CCA0 /* FilterService.swift */; };
-		4CC16EFB28D373B100100F54 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 4CC16EFA28D373B100100F54 /* SnapKit */; };
 		4CC16EFE28D8B54300100F54 /* PhotoFilterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CC16EFD28D8B54300100F54 /* PhotoFilterViewController.swift */; };
 		4CC16F0028D8B66600100F54 /* PhotoCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CC16EFF28D8B66600100F54 /* PhotoCollectionViewController.swift */; };
 /* End PBXBuildFile section */
@@ -83,6 +83,7 @@
 		4CC16EF828D3724100100F54 /* Subject.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = Subject.playground; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		4CC16EFD28D8B54300100F54 /* PhotoFilterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoFilterViewController.swift; sourceTree = "<group>"; };
 		4CC16EFF28D8B66600100F54 /* PhotoCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoCollectionViewController.swift; sourceTree = "<group>"; };
+		4CCA7F53297E28850070D7B5 /* CombiningOperator.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = CombiningOperator.playground; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -90,10 +91,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3C5C55702918C3C200C3E474 /* RxRelay in Frameworks */,
-				3C5C556E2918C3C200C3E474 /* RxCocoa in Frameworks */,
-				3C5C55722918C3C200C3E474 /* RxSwift in Frameworks */,
-				4CC16EFB28D373B100100F54 /* SnapKit in Frameworks */,
+				4C089750297E23B100F3305E /* RxSwift in Frameworks */,
+				4C089753297E23C600F3305E /* SnapKit in Frameworks */,
+				4C08974E297E23B100F3305E /* RxRelay in Frameworks */,
+				4C08974C297E23B100F3305E /* RxCocoa in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -174,6 +175,14 @@
 				3CD99F7828B8AA750038D632 /* Observable.playground */,
 			);
 			path = Observable;
+			sourceTree = "<group>";
+		};
+		4C089748297E222200F3305E /* Combining Operator */ = {
+			isa = PBXGroup;
+			children = (
+				4CCA7F53297E28850070D7B5 /* CombiningOperator.playground */,
+			);
+			path = "Combining Operator";
 			sourceTree = "<group>";
 		};
 		4C5365C328F440B3000B8F7D /* Filtering Operator */ = {
@@ -284,6 +293,7 @@
 				4C55243428FEDEA500FC5070 /* TODOListApp */,
 				4C8B7390291692B100384A00 /* Transforming Operator */,
 				3C5C55732918C48D00C3E474 /* GoodNews */,
+				4C089748297E222200F3305E /* Combining Operator */,
 				4C7152D628D8CBA500086943 /* Utils */,
 				4C73EF3228B3BF9D00C96D3D /* Info.plist */,
 				4C7152D028D8C46400086943 /* Launch Screen.storyboard */,
@@ -359,10 +369,10 @@
 			);
 			name = usket.RxSwift;
 			packageProductDependencies = (
-				4CC16EFA28D373B100100F54 /* SnapKit */,
-				3C5C556D2918C3C200C3E474 /* RxCocoa */,
-				3C5C556F2918C3C200C3E474 /* RxRelay */,
-				3C5C55712918C3C200C3E474 /* RxSwift */,
+				4C08974B297E23B100F3305E /* RxCocoa */,
+				4C08974D297E23B100F3305E /* RxRelay */,
+				4C08974F297E23B100F3305E /* RxSwift */,
+				4C089752297E23C600F3305E /* SnapKit */,
 			);
 			productName = usket.RxSwift;
 			productReference = 4C73EF2128B3BF9A00C96D3D /* usket.RxSwift.app */;
@@ -437,8 +447,8 @@
 			);
 			mainGroup = 4C73EF1828B3BF9A00C96D3D;
 			packageReferences = (
-				4CC16EF928D373B100100F54 /* XCRemoteSwiftPackageReference "SnapKit" */,
-				3C5C556C2918C3C200C3E474 /* XCRemoteSwiftPackageReference "RxSwift" */,
+				4C08974A297E23B100F3305E /* XCRemoteSwiftPackageReference "RxSwift" */,
+				4C089751297E23C600F3305E /* XCRemoteSwiftPackageReference "SnapKit" */,
 			);
 			productRefGroup = 4C73EF2228B3BF9A00C96D3D /* Products */;
 			projectDirPath = "";
@@ -658,7 +668,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = XN968856C5;
+				DEVELOPMENT_TEAM = 46QF7GBZH7;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = usket.RxSwift/Info.plist;
 				INFOPLIST_KEY_NSMainNibFile = Main;
@@ -671,7 +681,7 @@
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -692,7 +702,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = XN968856C5;
+				DEVELOPMENT_TEAM = 46QF7GBZH7;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = usket.RxSwift/Info.plist;
 				INFOPLIST_KEY_NSMainNibFile = Main;
@@ -705,7 +715,7 @@
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -857,7 +867,7 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		3C5C556C2918C3C200C3E474 /* XCRemoteSwiftPackageReference "RxSwift" */ = {
+		4C08974A297E23B100F3305E /* XCRemoteSwiftPackageReference "RxSwift" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/ReactiveX/RxSwift";
 			requirement = {
@@ -865,7 +875,7 @@
 				minimumVersion = 6.0.0;
 			};
 		};
-		4CC16EF928D373B100100F54 /* XCRemoteSwiftPackageReference "SnapKit" */ = {
+		4C089751297E23C600F3305E /* XCRemoteSwiftPackageReference "SnapKit" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/SnapKit/SnapKit";
 			requirement = {
@@ -876,24 +886,24 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		3C5C556D2918C3C200C3E474 /* RxCocoa */ = {
+		4C08974B297E23B100F3305E /* RxCocoa */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 3C5C556C2918C3C200C3E474 /* XCRemoteSwiftPackageReference "RxSwift" */;
+			package = 4C08974A297E23B100F3305E /* XCRemoteSwiftPackageReference "RxSwift" */;
 			productName = RxCocoa;
 		};
-		3C5C556F2918C3C200C3E474 /* RxRelay */ = {
+		4C08974D297E23B100F3305E /* RxRelay */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 3C5C556C2918C3C200C3E474 /* XCRemoteSwiftPackageReference "RxSwift" */;
+			package = 4C08974A297E23B100F3305E /* XCRemoteSwiftPackageReference "RxSwift" */;
 			productName = RxRelay;
 		};
-		3C5C55712918C3C200C3E474 /* RxSwift */ = {
+		4C08974F297E23B100F3305E /* RxSwift */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 3C5C556C2918C3C200C3E474 /* XCRemoteSwiftPackageReference "RxSwift" */;
+			package = 4C08974A297E23B100F3305E /* XCRemoteSwiftPackageReference "RxSwift" */;
 			productName = RxSwift;
 		};
-		4CC16EFA28D373B100100F54 /* SnapKit */ = {
+		4C089752297E23C600F3305E /* SnapKit */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 4CC16EF928D373B100100F54 /* XCRemoteSwiftPackageReference "SnapKit" */;
+			package = 4C089751297E23C600F3305E /* XCRemoteSwiftPackageReference "SnapKit" */;
 			productName = SnapKit;
 		};
 /* End XCSwiftPackageProductDependency section */
