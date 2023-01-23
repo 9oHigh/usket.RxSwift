@@ -483,7 +483,7 @@
 
 
 <details>
- <summary> <H2>section 6: Transforming Operator</H2> </summary>
+ <summary> <H2>section 7: Transforming Operator</H2> </summary>
  <div markdown="5">
  
  - toArray
@@ -578,4 +578,184 @@
         ```
  
 </div>
+ </details>
+ 
+ <details>
+ <summary> <H2>section 9: Transforming Operator</H2> </summary>
+ <div markdown="6">
+ 
+- startWith
+    - 기존의 시퀀스에서 첫 번째에 요소를 추가할 수 있는 오퍼레이터이다.
+        
+        ```swift
+        // MARK: startWith
+        
+        private let numbers = Observable.of(2,3,4)
+        
+        private let observable = numbers.startWith(1)
+        
+        observable.subscribe(onNext: {
+            print($0)
+        }).disposed(by: disposeBag)
+        
+        // print : 1,2,3,4
+        ```
+        
+
+- concat
+    - 특정한 시퀀스에 다른 시퀀스의 요소들을 앞 혹은 뒤에 추가할 수 있게 해주는 오퍼레이터이다.
+        
+        ```swift
+        // MARK: concat
+        
+        private let first = Observable.of(1,2,3)
+        private let second = Observable.of(4,5,6)
+        
+        private let concatObservable = Observable.concat([first, second])
+        
+        concatObservable.subscribe(onNext: {
+            print($0)
+        }).disposed(by: disposeBag)
+        
+        // print : 1,2,3,4,5,6
+        ```
+        
+
+- merge
+    - 시퀀스를 합쳐주는 오퍼레이터로 여러개의 시퀀스를 동시에 구독한다.
+    - 내부의 시퀀스가 complete되는 시점은 모두 독립적이다
+    - 내부의 시퀀스가 error를 방출하면 merge 시퀀스도 에러를 방출하며 구독이 종료된다.
+    - 내부의 시퀀스가 종료되면 merge 시퀀스도 종료된다.
+        
+        ```swift
+        // MARK: merge
+        
+        private let left = PublishSubject<Int>()
+        private let right = PublishSubject<Int>()
+        
+        private let source = Observable.of(left.asObservable(), right.asObservable())
+        
+        private let mergeObseravable = source.merge()
+        mergeObseravable.subscribe(onNext: {
+            print($0)
+        }).disposed(by: disposeBag)
+        
+        left.onNext(5)
+        left.onNext(3)
+        right.onNext(2)
+        right.onNext(1)
+        left.onNext(99)
+        
+        // print : 5, 3, 2, 1, 99
+        ```
+        
+
+- combineLatest
+    - 두개의 시퀀스를 하나로 합쳐주는 오퍼레이터이다.
+    - 최초에 서브 시퀀스 어느 하나라도 방출하는 요소가 없다면 방출하지 않는다.
+    - left를 기준으로 right이 나중에 오면 left에서의 최신 값과 순서대로 매칭된다.
+        
+        ```swift
+        // MARK: combineLatest
+        
+        private let clLeft = PublishSubject<Int>()
+        private let clRight = PublishSubject<Int>()
+        
+        private let clObservable = Observable.combineLatest(clLeft, clRight) { lastLeft, lastRight in
+            "\(lastLeft) \(lastRight)"
+        }
+        
+        let disposable = clObservable.subscribe(onNext: {
+            print($0)
+        })
+        
+        clLeft.onNext(45)
+        clRight.onNext(1)
+        clLeft.onNext(30)
+        clRight.onNext(1)
+        clRight.onNext(2)
+        /*
+        print
+        45 1
+        30 1
+        30 1
+        30 2
+        */
+        ```
+        
+
+- withLatestFrom
+    - 특정한 트리거가 방출되었을 경우, 최신 값을 얻기 위해서 사용하는 오퍼레이터이다.
+        
+        ```swift
+        // MARK: withLatestFrom
+        
+        private let button = PublishSubject<String>()
+        private let textField = PublishSubject<String>()
+        
+        private let wlfObservable = button.withLatestFrom(textField)
+        private let wlfDisposable = wlfObservable.subscribe(onNext: {
+            print($0)
+        })
+        
+        textField.onNext("Sw")
+        textField.onNext("Swif")
+        button.onNext("CLICKED")
+        textField.onNext("Swift")
+        textField.onNext("Swift Rocks!")
+        button.onNext("CLICKED")
+        
+        /*
+        Swif
+        Swift Rocks!
+        */
+        ```
+        
+
+- reduce
+    - 시퀀스내에서의 요소들간의 결합을 위해 사용하는 오퍼레이터이다.
+    - 아래의 예시는 모든 내부 요소의 합을 원할 경우이다.
+        
+        ```swift
+        // MARK: reduce
+        
+        private let reduceSource = Observable.of(1,2,3)
+        
+        reduceSource.reduce(0, accumulator: +)
+            .subscribe({
+                print($0)
+            }).disposed(by: disposeBag)
+        
+        reduceSource.reduce(0) { summary, newValue in
+            return summary + newValue
+        }.subscribe({
+            print($0)
+        }).disposed(by: disposeBag)
+        
+        /*
+        6
+        6
+        */
+        ```
+        
+- scan
+    - reduce의 경우 결합이 완료된 후 값을 방출한다면 scan은 연산을 할 때마다 값을 방출하게 된다.
+        
+        ```swift
+        // MARK: scan
+        
+        private let scanSource = Observable.of(1, 2, 3)
+        
+        scanSource.scan(0, accumulator: +)
+            .subscribe(onNext: {
+                print($0)
+            })
+            .disposed(by: disposeBag)
+        /*
+        1
+        3
+        6
+        */
+        ```
+ </div>
  </details>
