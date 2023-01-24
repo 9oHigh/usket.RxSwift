@@ -26,8 +26,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
          let rootViewController = UINavigationController(rootViewController: viewController )
          */
         
-        let viewController = NewsTableViewController()
-        viewController.title = "Good News"
+        let viewController = WeatherViewController()
+        viewController.title = "Good Weather"
         let rootViewController = UINavigationController(rootViewController: viewController )
         
         window = UIWindow(windowScene: windowScene)
