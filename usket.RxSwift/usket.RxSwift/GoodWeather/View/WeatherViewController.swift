@@ -30,6 +30,7 @@ final class WeatherViewController: UIViewController {
         view.backgroundColor = .white
         
         cityNameTextField.borderStyle = .roundedRect
+        cityNameTextField.returnKeyType = .search
         
         tempLabel.font = UIFont.boldSystemFont(ofSize: 40)
         humidityLabel.font = UIFont.systemFont(ofSize: 34)
@@ -79,14 +80,32 @@ final class WeatherViewController: UIViewController {
     }
     
     private func setBind() {
-        
-        self.cityNameTextField.rx.text
+        /*
+         기존코드
+         self.cityNameTextField.rx.text
+             .subscribe({ city in
+                 if let city = city.element {
+                     if city!.isEmpty {
+                         self.displayWeather(nil)
+                     } else {
+                         self.fetchWeather(by: city!.lowercased())
+                     }
+                 }
+             })
+             .disposed(by: disposeBag)
+         */
+        self.cityNameTextField.rx.controlEvent(.editingDidEndOnExit)
+            .map { self.cityNameTextField.text }
             .subscribe({ city in
+
                 if let city = city.element {
-                    if city!.isEmpty {
+                    
+                    guard let city = city else { return }
+                    
+                    if city.isEmpty {
                         self.displayWeather(nil)
                     } else {
-                        self.fetchWeather(by: city!.lowercased())
+                        self.fetchWeather(by: city.lowercased())
                     }
                 }
             })
@@ -102,17 +121,51 @@ final class WeatherViewController: UIViewController {
         
         let resource = Resource<WeatherResult>(url: url)
         
-        URLRequest.load(resource: resource)
+        /*
+         기존 코드
+         URLRequest.load(resource: resource)
+             .observe(on: MainScheduler.instance)
+             .catchAndReturn(WeatherResult.empty)
+             .subscribe({ [weak self] result in
+                 
+                 if let result = result.element, let main = result?.main {
+                     DispatchQueue.main.async {
+                         self?.displayWeather(main)
+                     }
+                 }
+             })
+             .disposed(by: disposeBag)
+         */
+        
+        /*
+        // MARK: - bind
+         let search = URLRequest.load(resource: resource)
+             .observe(on: MainScheduler.instance)
+             .catchAndReturn(WeatherResult.empty)
+         
+         search.map { "\(String(describing: $0?.main.temp)) ℉" }
+             .bind(to: self.tempLabel.rx.text)
+             .disposed(by: disposeBag)
+         
+         search.map { "\(String(describing: $0?.main.humidity)) 💦" }
+             .bind(to: self.humidityLabel.rx.text)
+             .disposed(by: disposeBag)
+         */
+        
+        
+        // MARK: - drive
+        // bind와 같은 기능이지만 main scheduler에서 사용
+        
+        let search = URLRequest.load(resource: resource)
             .observe(on: MainScheduler.instance)
-            .catchAndReturn(WeatherResult.empty)
-            .subscribe({ [weak self] result in
-                
-                if let result = result.element, let main = result?.main {
-                    DispatchQueue.main.async {
-                        self?.displayWeather(main)
-                    }
-                }
-            })
+            .asDriver(onErrorJustReturn: WeatherResult.empty)
+        
+        search.map { "\(String(describing: $0?.main.temp)) ℉" }
+            .drive(self.tempLabel.rx.text)
+            .disposed(by: disposeBag)
+        
+        search.map { "\(String(describing: $0?.main.humidity)) 💦" }
+            .drive(self.humidityLabel.rx.text)
             .disposed(by: disposeBag)
     }
     
