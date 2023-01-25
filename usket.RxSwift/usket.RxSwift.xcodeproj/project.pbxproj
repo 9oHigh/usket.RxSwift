@@ -17,6 +17,7 @@
 		4C089753297E23C600F3305E /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 4C089752297E23C600F3305E /* SnapKit */; };
 		4C1E5C6429801EF800582AED /* WeatherViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C1E5C6329801EF800582AED /* WeatherViewController.swift */; };
 		4C1E5C692980227500582AED /* WeatherResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C1E5C682980227500582AED /* WeatherResult.swift */; };
+		4C1E5C6B2980314C00582AED /* URL+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C1E5C6A2980314C00582AED /* URL+Extension.swift */; };
 		4C55243628FEDEC000FC5070 /* TaskListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C55243528FEDEC000FC5070 /* TaskListViewController.swift */; };
 		4C55243A28FEEF8F00FC5070 /* TaskTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C55243928FEEF8F00FC5070 /* TaskTableViewCell.swift */; };
 		4C55243C28FEF0EB00FC5070 /* AddTaskViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C55243B28FEF0EB00FC5070 /* AddTaskViewController.swift */; };
@@ -62,6 +63,7 @@
 		4C089746297D9D9200F3305E /* URLRequest + Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URLRequest + Extension.swift"; sourceTree = "<group>"; };
 		4C1E5C6329801EF800582AED /* WeatherViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherViewController.swift; sourceTree = "<group>"; };
 		4C1E5C682980227500582AED /* WeatherResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherResult.swift; sourceTree = "<group>"; };
+		4C1E5C6A2980314C00582AED /* URL+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URL+Extension.swift"; sourceTree = "<group>"; };
 		4C5365C428F440EA000B8F7D /* FilteringOperator.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = FilteringOperator.playground; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		4C55243528FEDEC000FC5070 /* TaskListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskListViewController.swift; sourceTree = "<group>"; };
 		4C55243928FEEF8F00FC5070 /* TaskTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskTableViewCell.swift; sourceTree = "<group>"; };
@@ -278,6 +280,7 @@
 			children = (
 				4C7152D828D8CBC400086943 /* UIViewController + Extension.swift */,
 				4C089746297D9D9200F3305E /* URLRequest + Extension.swift */,
+				4C1E5C6A2980314C00582AED /* URL+Extension.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -543,6 +546,7 @@
 				4C7152D928D8CBC400086943 /* UIViewController + Extension.swift in Sources */,
 				4C089747297D9D9200F3305E /* URLRequest + Extension.swift in Sources */,
 				3C5C5577291A15E900C3E474 /* NewsListViewController.swift in Sources */,
+				4C1E5C6B2980314C00582AED /* URL+Extension.swift in Sources */,
 				4C55243F29003B0A00FC5070 /* Task.swift in Sources */,
 				4CC16EFE28D8B54300100F54 /* PhotoFilterViewController.swift in Sources */,
 				3C5C563E292C8E2100C3E474 /* Article.swift in Sources */,
