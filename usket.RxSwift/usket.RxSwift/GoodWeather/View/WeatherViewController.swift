@@ -154,17 +154,42 @@ final class WeatherViewController: UIViewController {
         
         
         // MARK: - drive
-        // bind와 같은 기능이지만 main scheduler에서 사용
+        
+        /*
+         기존 코드
+         bind와 같은 기능이지만 main scheduler에서 사용
+         let search = URLRequest.load(resource: resource)
+             .observe(on: MainScheduler.instance)
+             .asDriver(onErrorJustReturn: WeatherResult.empty)
+         */
+        
+        // MARK: - Handle Errors with Catch
+        
+        /*
+         let search = URLRequest.load(resource: resource)
+             .observe(on: MainScheduler.instance)
+             .catch { error in
+                 print(error.localizedDescription)
+                 return Observable.just(WeatherResult.empty)
+             }.asDriver(onErrorJustReturn: WeatherResult.empty)
+         */
+
+        // MARK: - Retrying on Error
         
         let search = URLRequest.load(resource: resource)
             .observe(on: MainScheduler.instance)
-            .asDriver(onErrorJustReturn: WeatherResult.empty)
+            .retry(3)
+            .catch { error in
+                print(error.localizedDescription)
+                return Observable.just(WeatherResult.empty)
+            }.asDriver(onErrorJustReturn: WeatherResult.empty)
         
-        search.map { "\(String(describing: $0?.main.temp)) ℉" }
+        
+        search.map { "\(String(describing: $0!.main.temp)) ℉" }
             .drive(self.tempLabel.rx.text)
             .disposed(by: disposeBag)
         
-        search.map { "\(String(describing: $0?.main.humidity)) 💦" }
+        search.map { "\(String(describing: $0!.main.humidity)) 💦" }
             .drive(self.humidityLabel.rx.text)
             .disposed(by: disposeBag)
     }
