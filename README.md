@@ -581,7 +581,7 @@
  </details>
  
  <details>
- <summary> <H2>section 9: Transforming Operator</H2> </summary>
+ <summary> <H2>section 9: Combining Operator</H2> </summary>
  <div markdown="6">
  
 - startWith
@@ -758,4 +758,82 @@
         */
         ```
  </div>
+ </details>
+ 
+ <details>
+ <summary> <H2>Section 12: Error Handling</H2> </summary>
+ <div markdown="12">
+ 
+ - throw
+    
+    ```swift
+    // MARK: - Throwing Error
+    
+    // 기존 코드
+    static func load<T>(resource: Resource<T>) -> Observable<T?> {
+             
+       return Observable.from([resource.url])
+           .flatMap { url -> Observable<Data> in
+               let request = URLRequest(url: url)
+               return URLSession.shared.rx.data(request: request)
+           }.map { data -> T? in
+               return try? JSONDecoder().decode(T.self, from: data)
+           }.asObservable()
+    }
+    // 200 < StatusCode < 300 에서 벗어난 값이 온다면 Throw
+    // map의 리턴값은 Observable이 아님. 사이드이펙트 처리 시 throw를 리턴하여 처리
+    static func load<T: Decodable>(resource: Resource<T>) -> Observable<T?> {
+            
+        return Observable.just(resource.url)
+            .flatMap { url -> Observable<(response: HTTPURLResponse, data: Data)> in
+                let request = URLRequest(url: url)
+                return URLSession.shared.rx.response(request: request)
+            }.map { response, data -> T in
+                if 200 ..< 300 ~= response.statusCode {
+                    return try JSONDecoder().decode(T.self, from: data)
+                } else {
+                    throw RxCocoaURLError.httpRequestFailed(response: response, data: data)
+                }
+            }.asObservable()
+        
+    }
+    ```
+    
+
+- chatchError → catch로 변경( 사용중인 버전 - 6.5.0)
+    - throw된 에러를 받아 처리할 수 있게 해주는 Operator
+        
+        ```swift
+        // MARK: - Handle Errors with Catch
+        
+        // 기존 코드
+        let search = URLRequest.load(resource: resource)
+                     .observe(on: MainScheduler.instance)
+                     .asDriver(onErrorJustReturn: WeatherResult.empty)
+        
+        // catch
+        
+        let search = URLRequest.load(resource: resource)
+                     .observe(on: MainScheduler.instance)
+                     .catch { error in
+                         print(error.localizedDescription)
+                         return Observable.just(WeatherResult.empty)
+                     }.asDriver(onErrorJustReturn: WeatherResult.empty)
+        ```
+        
+
+- retry
+    - Error가 발생했을 경우 재시도할 수 있게 해주는 Operator로 최대 시도 횟수를 지정할 수 있다.
+        
+        ```swift
+        let search = URLRequest.load(resource: resource)
+                    .observe(on: MainScheduler.instance)
+                    .retry(3)
+                    .catch { error in
+                        print(error.localizedDescription)
+                        return Observable.just(WeatherResult.empty)
+                    }.asDriver(onErrorJustReturn: WeatherResult.empty)
+        ```
+ 
+  </div>
  </details>
