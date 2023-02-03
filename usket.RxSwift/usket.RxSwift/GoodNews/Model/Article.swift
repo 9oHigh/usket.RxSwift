@@ -13,7 +13,7 @@ struct ArticleList: Decodable {
 
 extension ArticleList {
     static var all: Resource<ArticleList> = {
-        let url = URL(string: "https://newsapi.org/v2/everything?q=tesla&from=2022-12-22&sortBy=publishedAt&apiKey=f9dc43ce33ae4fe09478fabcab42d82b")!
+        let url = URL(string: "https://newsapi.org/v2/top-headlines?country=us&apiKey=f9dc43ce33ae4fe09478fabcab42d82b")!
         return Resource(url: url)
     }()
 }
